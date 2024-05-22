@@ -1,0 +1,136 @@
+USE waremart_s5256284;
+
+INSERT INTO warehouse VALUES
+      ('001', '10 Bread Lane', 'Brisbane', 'QLD', '4500', null),
+      ('002', '11 Butter Street', 'Melbourne', 'VIC', '3465', null),
+      ('003', '12 Coriander Court', 'Melbourne', 'VIC', '3468', null),
+      ('004', '13 Ham Parade', 'Ipswich', 'QLD', '4357', null),
+      ('005', '14 Peanut Street', 'Sydney', 'NSW', '2345', null);
+
+INSERT INTO employee VALUES
+	(NULL, 'REN', 'KYLO', '1974-01-13', '15 Sauce Street', 'Brisbane', 'QLD', '4510',       123000.0000, '001', null),
+	(NULL, 'FETT', 'BOBA', '1981-03-23', '16 Salami Street', 'Melbourne', 'VIC', '3225', 123000.0000, '002', null),
+	(NULL, 'PALPATINE', 'SHEEVE', '1973-04-12', '17 Pork Road', 'Melbourne', 'VIC', '3862',      123000.0000, '003', null),
+	(NULL, 'BINKS', 'JARJAR', '1962-07-18', '18 Tomato Court', 'Gold Coast', 'QLD', '4111', 78000.0000, '004', null),
+	(NULL, 'DAMERON', 'POE', '1981-07-19', '19 Pizza Avenue', 'Adelaide', 'SA', '5545', 123000.0000, '005', null),
+
+	(NULL, 'VADER', 'DARTH', '1978-02-23', '21 Jump Street', 'Brisbane', 'QLD', '4001',       60000.0000, '001', 1),
+	(NULL, 'SKYWALKER', 'ANAKIN', '2001-05-03', '70 Gingerbread Street', 'Melbourne', 'VIC', '3465', 62000.0000, '002', 2),
+	(NULL, 'SOLO', 'HAN', '1985-11-27', '12 Apple Road', 'Melbourne', 'VIC', '3133',      78000.0000, '003', 3),
+	(NULL, 'BAKA', 'CHEW', '1962-07-18', '1 Sasauge street', 'Ipswich', 'QLD', '4120', 78000.0000, '004', 4),
+	(NULL, 'DOE', 'JOHN', '1981-07-19', '41 Potato Avenue', 'Sydney', 'NSW', '2005', 78000.0000, '005', 5),
+
+	(NULL, 'BAKER', 'TOM', '1999-02-03', '46 Avondale Drive', 'Brisbane', 'QLD', '4060',       50000.0000, '001', 6),
+	(NULL, 'SMITH', 'JACK', '2002-07-26', '65 Cherokee Road', 'Melboure', 	'NSW', '6331', 50000.0000, '002', 7),
+	(NULL, 'WANG', 'JAMES', '1995-12-10', '99 Hargrave Road', 'Melboure', 'NSW', '1567',      50000.0000, '003', 8),
+	(NULL, 'TUKU', 'GEOFF', '1992-06-18', '86 Hart Street', 'Ipswich', 'QLD', '4811', 50000.0000, '004', 9),
+	(NULL, 'MUAY', 'WILL', '2000-03-29', '46 Cecil Street', 'Sydney', 'NSW', '2545', 50000.0000, '005', 10);
+
+
+
+UPDATE warehouse
+SET managerID = 1
+WHERE warehouseID = '001';
+UPDATE warehouse
+SET managerID = 2
+WHERE warehouseID = '002';
+UPDATE warehouse
+SET managerID = 3
+WHERE warehouseID = '003';
+UPDATE warehouse
+SET managerID = 4
+WHERE warehouseID = '004';
+UPDATE warehouse
+SET managerID = 5
+WHERE warehouseID = '005';
+
+
+INSERT INTO location VALUES
+	('001', 'L01', 3, 6, 14, 3.1, 1),
+        ('002', 'L02', 4, 4, 12, 2.3, 1),
+	('003', 'L03', 7, 1, 1, 2.5, 1),
+	('004', 'L04', 4, 9, 8, 3.0, 1),
+	('005', 'L05', 2, 11, 13, 2.3, 1);
+
+INSERT INTO department VALUES
+	(NULL, 'kids'),
+	(NULL, 'sports'),
+	(NULL, 'garden'),
+	(NULL, 'Tech'),
+	(NULL, 'party');
+
+	
+INSERT INTO product VALUES
+	(NULL, 'skipping rope', 1, 1),
+	(NULL, 'balloons', 2, 4),
+	(NULL, 'basketball', 3, 2),
+	(NULL, 'toy pony', 4, 2),
+	(NULL, 'frisbee', 4, 5);
+
+
+INSERT INTO prod_location VALUES
+	('001', 'L01', 1, 13),
+	('002', 'L02', 2, 31),
+	('002', 'L02', 3, 11),
+	('003', 'L03', 4, 15),
+	('003', 'L03', 5, 13),
+	('003', 'L03', 1, 1),
+	('001', 'L01', 2, 3);
+
+INSERT INTO client VALUES
+	(NULL, 'Walter White'),
+	(NULL, 'Jesse Pinkman'),
+	(NULL, 'Rick Grimes'),
+	(NULL, 'John Marsden'),
+	(NULL, 'Trevor Phillips'),
+	(NULL, 'Forrest Gump'),
+	(NULL, 'Steve Rogers'),
+	(NULL, 'Bilbo Baggins'),
+	(NULL, 'Michael Scott');
+
+INSERT INTO client_address VALUES
+	(1, 'P', '13 Koala Crescent', 'Brisbane', 'QLD', '4502'),
+	(2, 'P', '34 Turtle Avenue', 'Penrith', 'NSW', '6526'),
+	(3, 'R', '56 Kangaroo Court', 'Melbourne', 'VIC', '5567'),
+	(4, 'R', '12 Kookaburra Crescent', 'Adelaide', 'SA', '1234'),
+	(5, 'M', '3 Emu Street', 'Darwin', 'NT', '7632');
+
+INSERT INTO stock_request VALUES
+	(NULL, '2022-05-21', 1), 
+	(NULL, '2022-05-21', 2), 
+	(NULL, '2022-05-21', 3), 
+	(NULL, '2022-05-21', 4), 
+	(NULL, '2022-05-20', 5), 
+	(NULL, '2022-05-20', 6), 
+	(NULL, '2022-05-19', 7), 
+	(NULL, '2022-05-19', 8);
+
+
+
+INSERT INTO request_list VALUES
+	(1, 1, 4), 
+	(2, 2, 7), 
+	(3, 3, 41), 
+	(4, 4, 2), 
+	(5, 5, 31), 
+	(6, 1, 6),
+	(7, 2, 6),
+	(8, 2, 6);
+    
+INSERT INTO picking_list VALUES
+	('001', 'L01', 1, 1, 3, '2022-05-21', 6),
+	('002', 'L02', 2, 2, 3, '2022-05-21', 7),
+	('002', 'L02', 3, 3, 3, '2022-05-21', 7),
+	('003', 'L03', 4, 4, 3, '2022-05-21', 8),
+	('003', 'L03', 5, 5, 3, '2022-05-21', 8),
+	('003', 'L03', 1, 6, 3, '2022-05-21', 13),
+	('001', 'L01', 2, 7, 3, '2022-05-21', 11),
+	('001', 'L01', 2, 8, 3, '2022-05-21', 11);
+
+
+
+
+
+
+
+

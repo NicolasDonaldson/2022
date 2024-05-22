@@ -1,0 +1,137 @@
+CREATE DATABASE IF NOT EXISTS
+WAREMART_S5256284;
+
+USE WAREMART_S5256284;
+
+CREATE TABLE IF NOT EXISTS 
+WAREHOUSE(
+warehouseID	VARCHAR(3)	PRIMARY KEY,
+street	VARCHAR(20),
+city	VARCHAR(15),
+state	CHAR(3),
+postcode	CHAR(4),
+managerID	INT
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS
+EMPLOYEE(
+staffID   INT	AUTO_INCREMENT	PRIMARY KEY,
+surname	VARCHAR(20),
+firstName	VARCHAR(15),
+dob	Date,
+street	VARCHAR(20),
+city	VARCHAR(15),
+state	CHAR(3),
+postcode	CHAR(4),
+salary	Decimal(19,4),
+warehouseID	VARCHAR(3),
+supervisedBy	INT,
+FOREIGN KEY(supervisedBy) REFERENCES EMPLOYEE(staffID)
+) ENGINE=InnoDB;
+
+ALTER TABLE warehouse
+ADD CONSTRAINT FK_managerID
+FOREIGN KEY (managerID)
+REFERENCES employee(staffID);
+
+CREATE TABLE IF NOT EXISTS
+LOCATION(
+warehouseID   VARCHAR(3),
+locationID	VARCHAR(3),
+Aisle	INT,
+Shelf	INT,
+Bin	INT,
+Capacity	Decimal(5,2),
+hazardousAllowed	TINYINT(1),
+PRIMARY KEY (warehouseID, locationID)
+) ENGINE=InnoDB;
+CREATE TABLE IF NOT EXISTS
+DEPARTMENT(
+dptNumber	INT	AUTO_INCREMENT	PRIMARY KEY,
+dptName	VARCHAR(20)
+) ENGINE=InnoDB;
+
+
+
+CREATE TABLE IF NOT EXISTS
+PRODUCT(
+productNum	INT	AUTO_INCREMENT	PRIMARY KEY,
+description	VARCHAR(30),
+packSize	INT,
+dptNumber	INT,
+FOREIGN KEY(dptNumber) REFERENCES DEPARTMENT(dptNumber)
+) ENGINE=InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS
+PROD_LOCATION(
+warehouseID   VARCHAR(3),
+locationID	VARCHAR(3),
+productNum	INT,
+quantityOnHand	INT,
+PRIMARY KEY (warehouseID, locationID, productNum),
+FOREIGN KEY(warehouseID, locationID) REFERENCES LOCATION(warehouseID, locationID),
+FOREIGN KEY(productNum) REFERENCES PRODUCT(productNum)
+) ENGINE=InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS
+CLIENT(
+clientNum	INT	AUTO_INCREMENT	PRIMARY KEY,
+clientName	VARCHAR(40)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS
+CLIENT_ADDRESS(
+clientNum	INT,
+addressType	CHAR(1),
+street	VARCHAR(20),
+city	VARCHAR(15),
+state	CHAR(3),
+postcode	CHAR(4),
+PRIMARY KEY(clientNum, addressType),
+FOREIGN KEY(clientNum) REFERENCES CLIENT(clientNum)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS
+STOCK_REQUEST(
+requestNum	INT	AUTO_INCREMENT	PRIMARY KEY,
+requestDate	Date,
+clientNum	INT,
+FOREIGN KEY(clientNum) REFERENCES CLIENT(clientNum)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS
+REQUEST_LIST(
+requestNum	INT,
+productNum	INT,
+qtyRequested	INT,
+PRIMARY KEY(requestNum, productNum),
+FOREIGN KEY(requestNum) REFERENCES STOCK_REQUEST(requestNum),
+FOREIGN KEY(productNum) REFERENCES PRODUCT(productNum)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS
+PICKING_LIST(
+warehouseID	VARCHAR(3),
+locationID	VARCHAR(3),
+productNum	INT,
+requestNum	INT,
+quantityPicked	INT,
+datePicked	Date,
+pickerStaffID	INT,
+PRIMARY KEY(warehouseID, locationID, productNum, requestNum),
+FOREIGN KEY(warehouseID, locationID, productNum) REFERENCES PROD_LOCATION(warehouseID, locationID, productNum),
+FOREIGN KEY(productNum, requestNum) REFERENCES REQUEST_LIST(productNum, requestNum),
+FOREIGN KEY(pickerStaffID) REFERENCES EMPLOYEE(staffID)
+) ENGINE=InnoDB;
+
+
+
+
+
+
+
+
+
+	
